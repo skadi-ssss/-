@@ -14,6 +14,12 @@ const routes = [
         component: () => import('@/views/Register.vue'),
         meta: { requiresAuth: false }
     },
+    {
+        path: '/forgot-password',
+        name: 'Forgot-password',
+        component: () => import('@/views/ForgotPassword.vue'),
+        meta: { requiresAuth: false }
+    },
 
     // ============ 管理员路由 ============
     {

@@ -35,6 +35,10 @@
               show-password
               @keyup.enter="handleLogin"
           />
+          <!-- 忘记密码链接 -->
+          <div class="forgot-password">
+            <el-link type="primary" @click="goToForgotPassword">忘记密码？</el-link>
+          </div>
         </el-form-item>
 
         <!-- 登录按钮 -->
@@ -137,6 +141,11 @@ const handleLogin = async () => {
 const goToRegister = () => {
   router.push('/register')
 }
+
+// 跳转到忘记密码页面
+const goToForgotPassword = () => {
+  router.push('/forgot-password')
+}
 </script>
 
 <style scoped>
@@ -189,6 +198,13 @@ const goToRegister = () => {
 .login-btn {
   width: 100%;
   margin-top: 10px;
+}
+
+/* 忘记密码样式 */
+.forgot-password {
+  margin-top: 8px;
+  text-align: right;
+  font-size: 14px;
 }
 
 .register-link {

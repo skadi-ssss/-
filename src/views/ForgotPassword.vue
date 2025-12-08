@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>3333</div>
+<div>找回密码</div>
 </template>
 
 <style scoped>
