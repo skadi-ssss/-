@@ -14,6 +14,12 @@ const routes = [
         component: () => import('@/views/Register.vue'),
         meta: { requiresAuth: false }
     },
+    {
+        path: '/forgot-password',
+        name: 'Forgot-password',
+        component: () => import('@/views/ForgotPassword.vue'),
+        meta: { requiresAuth: false }
+    },
 
     // ============ 管理员路由 ============
     {
@@ -76,9 +82,9 @@ const routes = [
                 component: () => import('@/views/student/Profile.vue')
             },
             {
-                path: 'rooms',
-                name: 'StudentRooms',
-                component: () => import('@/views/student/Rooms.vue')
+                path: 'user-feedback',
+                name: 'User-feedback',
+                component: () => import('@/views/student/UserFeedback.vue')
             },
             {
                 path: 'about',
