@@ -9,10 +9,10 @@
         </router-link>
 
         <nav class="student-nav">
-          <router-link to="/student/main" class="nav-link">首页</router-link>
-          <router-link to="/student/rooms" class="nav-link">自习室</router-link>
+          <router-link to="/student" class="nav-link">自习室</router-link>
           <router-link to="/student/reservation" class="nav-link">我的预约</router-link>
           <router-link to="/student/profile" class="nav-link">个人中心</router-link>
+          <router-link to="/student/user-feedback" class="nav-link">投诉反馈</router-link>
           <el-button type="danger" size="small" @click="handleLogout">退出登录</el-button>
         </nav>
       </div>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>3333</div>
+  <div>自习室首页</div>
 </template>
 
 <style scoped>

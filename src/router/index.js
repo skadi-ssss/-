@@ -82,9 +82,9 @@ const routes = [
                 component: () => import('@/views/student/Profile.vue')
             },
             {
-                path: 'rooms',
-                name: 'StudentRooms',
-                component: () => import('@/views/student/Rooms.vue')
+                path: 'user-feedback',
+                name: 'User-feedback',
+                component: () => import('@/views/student/UserFeedback.vue')
             },
             {
                 path: 'about',

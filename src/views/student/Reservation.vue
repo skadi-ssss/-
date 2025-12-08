@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>1</div>
+  <div>我的预约</div>
 </template>
 
 <style scoped>
