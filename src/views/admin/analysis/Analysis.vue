@@ -62,10 +62,16 @@
         <el-card>
           <template #header>
             <span>预约趋势</span>
+            <el-select
+                v-model="chartType"
+                size="small"
+                style="width: 120px;"
+            >
+              <el-option label="近7天" value="7" />
+              <el-option label="近30天" value="30" />
+            </el-select>
           </template>
-          <div style="height: 300px; text-align: center; padding-top: 100px;">
-            <el-empty description="图表加载中" />
-          </div>
+          <div ref="lineChartRef" style="height: 300px;"></div>
         </el-card>
       </el-col>
 
@@ -74,9 +80,7 @@
           <template #header>
             <span>座位使用情况</span>
           </template>
-          <div style="height: 300px; text-align: center; padding-top: 100px;">
-            <el-empty description="图表加载中" />
-          </div>
+          <div ref="pieChartRef" style="height: 300px;"></div>
         </el-card>
       </el-col>
     </el-row>
@@ -87,9 +91,7 @@
           <template #header>
             <span>各时段使用热度</span>
           </template>
-          <div style="height: 350px; text-align: center; padding-top: 130px;">
-            <el-empty description="图表加载中" />
-          </div>
+          <div ref="barChartRef" style="height: 350px;"></div>
         </el-card>
       </el-col>
     </el-row>
@@ -97,7 +99,17 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, nextTick } from 'vue'
+import * as echarts from 'echarts'
+
+const lineChartRef = ref(null)
+const pieChartRef = ref(null)
+const barChartRef = ref(null)
+const chartType = ref('7')
+
+let lineChartInstance = null
+let pieChartInstance = null
+let barChartInstance = null
 
 const stats = reactive({
   totalUsers: 1568,
@@ -105,6 +117,147 @@ const stats = reactive({
   todayReservations: 89,
   utilizationRate: 74.2
 })
+
+onMounted(() => {
+  nextTick(() => {
+    initCharts()
+    window.addEventListener('resize', handleResize)
+  })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  if (lineChartInstance) {
+    lineChartInstance.dispose()
+  }
+  if (pieChartInstance) {
+    pieChartInstance.dispose()
+  }
+  if (barChartInstance) {
+    barChartInstance.dispose()
+  }
+})
+
+const handleResize = () => {
+  if (lineChartInstance) lineChartInstance.resize()
+  if (pieChartInstance) pieChartInstance.resize()
+  if (barChartInstance) barChartInstance.resize()
+}
+
+const initCharts = () => {
+  // 折线图 - 预约趋势
+  lineChartInstance = echarts.init(lineChartRef.value)
+  const lineOption = {
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['预约数量', '使用时长']
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        name: '预约数量',
+        type: 'line',
+        smooth: true,
+        data: [120, 132, 101, 134, 90, 230, 210]
+      },
+      {
+        name: '使用时长',
+        type: 'line',
+        smooth: true,
+        data: [220, 182, 191, 234, 290, 330, 310]
+      }
+    ]
+  }
+  lineChartInstance.setOption(lineOption)
+
+  // 饼图 - 座位使用情况
+  pieChartInstance = echarts.init(pieChartRef.value)
+  const pieOption = {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left'
+    },
+    series: [
+      {
+        name: '座位状态',
+        type: 'pie',
+        radius: '50%',
+        data: [
+          { value: 35, name: '空闲' },
+          { value: 45, name: '已预约' },
+          { value: 20, name: '使用中' },
+          { value: 10, name: '维护中' }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  }
+  pieChartInstance.setOption(pieOption)
+
+  // 柱状图 - 各时段使用热度
+  barChartInstance = echarts.init(barChartRef.value)
+  const barOption = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      data: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00']
+    },
+    yAxis: {
+      type: 'value',
+      name: '使用人数'
+    },
+    series: [
+      {
+        name: '使用人数',
+        type: 'bar',
+        data: [40, 65, 85, 95, 120, 140, 110, 75],
+        itemStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: '#83bff6' },
+            { offset: 0.5, color: '#188df0' },
+            { offset: 1, color: '#188df0' }
+          ])
+        }
+      }
+    ]
+  }
+  barChartInstance.setOption(barOption)
+}
 </script>
 
 <style scoped>
