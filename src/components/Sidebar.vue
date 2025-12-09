@@ -43,31 +43,27 @@
         <span>座位管理</span>
       </el-menu-item>
 
+      <!-- 投诉管理 -->
+      <el-sub-menu index="2">
+        <template #title>
+          <el-icon><ChatLineRound /></el-icon>
+          <span>投诉管理</span>
+        </template>
+        <el-menu-item index="/admin/complaint/list">
+          <el-icon><List /></el-icon>
+          <span>投诉列表</span>
+        </el-menu-item>
+        <el-menu-item index="/admin/complaint/analysis">
+          <el-icon><TrendCharts /></el-icon>
+          <span>投诉分析</span>
+        </el-menu-item>
+      </el-sub-menu>
+
       <!-- 数据分析 -->
       <el-menu-item index="/admin/analysis">
         <el-icon><TrendCharts /></el-icon>
         <span>数据分析</span>
       </el-menu-item>
-
-      <!-- 日志记录查询 -->
-      <el-sub-menu index="4">
-        <template #title>
-          <el-icon><Document /></el-icon>
-          <span>日志记录查询</span>
-        </template>
-        <el-menu-item index="/admin/log/user">
-          <el-icon><User /></el-icon>
-          <span>用户日志</span>
-        </el-menu-item>
-        <el-menu-item index="/admin/log/seat">
-          <el-icon><Location /></el-icon>
-          <span>座位日志</span>
-        </el-menu-item>
-        <el-menu-item index="/admin/log/admin">
-          <el-icon><Setting /></el-icon>
-          <span>管理操作日志</span>
-        </el-menu-item>
-      </el-sub-menu>
     </el-menu>
   </el-scrollbar>
 </template>

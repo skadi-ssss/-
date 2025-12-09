@@ -56,6 +56,19 @@ const routes = [
                 path: 'analysis',
                 name: 'AdminAnalysis',
                 component: () => import('@/views/admin/analysis/Analysis.vue')
+            },
+            // 添加投诉管理相关路由
+            {
+                path: 'complaint/list',
+                name: 'AdminComplaintList',
+                component: () => import('@/views/admin/complaint/List.vue'),
+                meta: { title: '投诉管理' }
+            },
+            {
+                path: 'complaint/analysis',
+                name: 'AdminComplaintAnalysis',
+                component: () => import('@/views/admin/complaint/Analysis.vue'),
+                meta: { title: '投诉分析' }
             }
         ]
     },
@@ -90,6 +103,13 @@ const routes = [
                 path: 'about',
                 name: 'StudentAbout',
                 component: () => import('@/views/student/About.vue')
+            },
+            // 添加学生投诉页面
+            {
+                path: 'complaint',
+                name: 'StudentComplaint',
+                component: () => import('@/views/student/Complaint.vue'),
+                meta: { title: '投诉与建议' }
             }
         ]
     },
