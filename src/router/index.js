@@ -95,11 +95,6 @@ const routes = [
                 component: () => import('@/views/student/Profile.vue')
             },
             {
-                path: 'user-feedback',
-                name: 'User-feedback',
-                component: () => import('@/views/student/UserFeedback.vue')
-            },
-            {
                 path: 'about',
                 name: 'StudentAbout',
                 component: () => import('@/views/student/About.vue')
@@ -110,7 +105,17 @@ const routes = [
                 name: 'StudentComplaint',
                 component: () => import('@/views/student/Complaint.vue'),
                 meta: { title: '投诉与建议' }
-            }
+            },
+            {
+                path: '/study-room/:id',
+                name: 'StudyRoomDetail',
+                component: () => import('@/views/student/StudyRoomDetail.vue'),
+                props: true, // 将路由参数作为props传递给组件
+                meta: {
+                    title: '自习室详情',
+                    requiresAuth: true
+                }
+            },
         ]
     },
 

@@ -250,9 +250,7 @@ const filteredStudyRooms = computed(() => {
 // 跳转到自习室详情页面
 const goToRoomDetail = (roomId) => {
   // 在实际应用中，这里应该使用路由跳转
-  // router.push(`/study-room/${roomId}`)
-  alert(`跳转到自习室 ${roomId} 的详情页面`)
-  console.log(`跳转到自习室 ${roomId} 的详情页面`)
+  router.push(`/study-room/${roomId}`)
 }
 
 // 模拟数据加载

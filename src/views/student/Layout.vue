@@ -11,7 +11,6 @@
           <router-link to="/student" class="nav-link">自习室</router-link>
           <router-link to="/student/reservation" class="nav-link">我的预约</router-link>
           <router-link to="/student/complaint" class="nav-link">投诉与建议</router-link>
-          <router-link to="/student/user-feedback" class="nav-link">问题反馈</router-link>
           <router-link to="/student/profile" class="nav-link">个人中心</router-link>
           <router-link to="/student/about" class="nav-link">关于我们</router-link>
 
